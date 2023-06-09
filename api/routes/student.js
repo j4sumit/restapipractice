@@ -75,7 +75,31 @@ router.post('/',(req, res, next)=>{
     })
    })
  })
-  
+
+ // PUT Request
+ router.put("/:id",(req,res,next)=>{
+    console.log(req.params.id);
+    Student.findOneAndUpdate({_id:req.params.id},{
+    $set : {
+        name : req.body.name,
+        email : req.body.email,
+        phone : req.body.phone,
+        gender : req.body.gender
+    }
+}
+)
+.then(result=>{
+    res.status(200).json({
+        updated_student :result
+    })
+})
+.catch(err=>{
+    console.log(err);
+    res.status(500).json({
+       error : err 
+    })
+})
+ })
 router.post('/',(req, res, next)=>{
         console.log(req);
         })
