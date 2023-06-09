@@ -18,7 +18,7 @@ Student.find()
 })
 })
 
-//second get
+//second get Element by ID
 
 router.get("/:id",(req,res,next) =>{
 console.log(req.params.id);
@@ -59,11 +59,24 @@ router.post('/',(req, res, next)=>{
                 })
                 })
       });
- 
+
+ ///Delete request
+ router.delete("/:id",(req,res,next)=>{
+   Student.deleteOne({_id:req.params.id})
+   .then(result=>{
+    res.status(200).json({
+        message: "Data deleted succesfully",
+        result:result
+    })
+   })
+   .catch(err =>{
+    res.status(500).json({
+        error:err
+    })
+   })
+ })
+  
 router.post('/',(req, res, next)=>{
-        // res.status(200).json({
-        //     msg:"this is student post request"
-        // })
         console.log(req);
         })
 
